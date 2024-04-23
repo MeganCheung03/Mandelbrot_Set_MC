@@ -38,8 +38,8 @@ private:
 	int m_pixelHeight;
 	int m_pixelWidth;
 
-	unsigned int countInterations(Vector2f coord);
-	void interationsToRGB(size_t count, Uint8& g, Uint8& b);
+	unsigned int countIterations(Vector2f coord);
+	void iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b);
 	Vector2f mapPixelToCoords(Vector2i mousePixel);
 };
 #endif
