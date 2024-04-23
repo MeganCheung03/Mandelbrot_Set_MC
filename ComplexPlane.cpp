@@ -12,7 +12,7 @@ ComplexPlane::ComplexPlane(int pixelWidth, int pixelHeight)
 	m_pixelHeight = pixelHeight;
 	m_aspectRatio = pixelHeight / pixelWidth; //careful of integer divide
 	m_plane_size = { BASE_WIDTH, BASE_HEIGHT * m_aspectRatio };
-	m_plane_center = { 0.0f, 0.0f };
+	m_plane_center = { 0, 0 };
 	m_zoomCount = 0;
 	m_state = State::CALCULATING;
 	m_vArray.setPrimitiveType(Points);
@@ -82,24 +82,15 @@ void ComplexPlane::loadText(Text& text)
 	text.setString(in.str());
 }
 
-unsigned int ComplexPlane::countIterations(Vector2f coord) //try understanding
+unsigned int ComplexPlane::countIterations(Vector2f coord) //reference complex code i canvas
 {
-	float real = coord.x;
-	float imag = coord.y;
-	float realTemp = real;
-	float imagTemp = imag;
+	complex<double> c(coord.x, coord.y);
+	complex<double> z(0, 0);
 	size_t count = 0;
 
 	while (count < MAX_ITER)
 	{
-		float realSquared = real * real;
-		float imagSquared = imag * imag;
-		if (realSquared + imagSquared > 4.0)
-		{
-			break; 
-		}
-		imag = 2.0 * real * imag + imagTemp;
-		real = realSquared - imagSquared + realTemp;
+		z = pow(z, 2) + c;
 		count++;
 	}
 	return count;
@@ -150,6 +141,6 @@ Vector2f ComplexPlane::mapPixelToCoords(Vector2i mousePixel) //aim to understand
 	float xCoord = static_cast<float>(mousePixel.x) / static_cast<float>(m_pixelWidth);
 	float yCoord = static_cast<float>(mousePixel.y) / static_cast<float>(m_pixelHeight);
 	float compX = ((xCoord * m_plane_size.x) + (m_plane_center.x - m_plane_size.x / 2.0f));
-	float compY = (1.0f - yCoord) * m_plane_size.y) + (m_plane_center.y - m_plane_size.y / 2.0f);
+	float compY = ((1.0f - yCoord) * m_plane_size.y) + (m_plane_center.y - m_plane_size.y / 2.0f);
 	return { compX , compY };
 }
