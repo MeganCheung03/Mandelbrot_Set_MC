@@ -1,5 +1,5 @@
 //Tafari, Megan
-#include <ComplexPlane.h>
+#include "ComplexPlane.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
@@ -48,17 +48,17 @@ int main()
 				if (event.mouseButton.button == sf::Mouse::Right)
 				{
 					complexPlane.zoomOut();
-					complexPlane.setCenter(Vector2i(event.mousebutton.x, event.mousebutton.y));
+					complexPlane.setCenter(Vector2i(event.mouseButton.x, event.mouseButton.y));
 				}
 				else if (event.mouseButton.button == sf::Mouse::Left)
 				{
 					complexPlane.zoomIn();
-					complexPlane.setCenter(Vector2i(event.mousebutton.x, event.mousebutton.y));
+					complexPlane.setCenter(Vector2i(event.mouseButton.x, event.mouseButton.y));
 				}
 			} //end of mouse clicks
 			if (event.type == sf::Event::MouseMoved)
 			{
-				complexPlane.setMouseLocation(Vector2i(event.mousebutton.x, event.mousebutton.y));
+				complexPlane.setMouseLocation(Vector2i(event.mouseButton.x, event.mouseButton.y));
 			} //end of mouse move
 			if (Keyboard::isKeyPressed(Keyboard::Escape))
 			{
@@ -71,7 +71,7 @@ int main()
 
 			//draw scene segment
 			window.clear();
-			window.draw(ComplexPlane);
+			window.draw(complexPlane);
 			window.draw(text);
 			window.display();
 		}
