@@ -8,8 +8,8 @@ using namespace sf;
 
 int main()
 {
-	int pixelWidth = VideoMode::getDesktopMode().width;
-	int pixelHeight = VideoMode::getDesktopMode().height;
+	int pixelWidth = VideoMode::getDesktopMode().width / 2;
+	int pixelHeight = VideoMode::getDesktopMode().height / 2;
 
 	VideoMode vm(pixelWidth, pixelHeight);
 
@@ -30,7 +30,7 @@ int main()
 		Text text;
 		text.setFont(font);
 		text.setString("Click, click, click for cool stuff");
-		text.setCharacterSize(24);
+		text.setCharacterSize(12);
 		text.setFillColor(Color::Yellow);
 		text.setStyle(Text::Bold);
 		window.draw(text);
